@@ -7,7 +7,8 @@ var callUpdateMiddleware = require('../middleware/call');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //res.render('index', { title: 'Express' });
-  res.sendFile(__dirname + "../public/index.html");
+
+ res.sendFile(__dirname + "../public/index.html");
 });
 
 
@@ -30,4 +31,8 @@ router.post('/call', function(req, res, next){
 	callUpdateMiddleware.updateCall(req, res);
 });
 
+router.get('/fetchAllData', function(req, res, next){
+	console.log("inside fetch all data");
+	 patientMiddleware.fetchAllData(req, res);
+});
 module.exports = router;

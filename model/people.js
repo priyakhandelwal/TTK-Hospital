@@ -26,7 +26,7 @@ var peopleModel = function() {
         entryDate: {
             type: Number
         },
-        exitData: {
+        exitDate: {
             type: Number
         },
         bucket: {
