@@ -30,7 +30,18 @@ $(document).ready(function() {
                   { "data": "exitDate"},
                   { "data": "bucket"},
                   { "data": "failedContactCount"},
-                  { "data": "languagePreference"}
+                  { "data": "languagePreference"},
+                  {
+                    "data": "",
+                    "render": function ( data, type, full, meta ) {
+                            return '<a class="btn btn-info btn-sm" href=#/' + full[0] + '>' + 'Calls' + '</a>';
+                    }
+                  },
+                  { "data": "",
+                    "render": function ( data, type, full, meta ) {
+                            return '<a class="btn btn-info btn-sm" href=#/' + full[0] + '>' + 'Edit' + '</a>';
+                    }
+                  }
 
               ],
               "iDisplayLength": 15,
