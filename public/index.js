@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     console.log("Hello");
+    var callHistoryList = $("#callHistoryModal .callHistoryList tbody");
     $.ajax({
         url: "/fetchAllData",
         //force to handle it as text
@@ -16,12 +17,21 @@ $(document).ready(function() {
               "data": data,
               "order": [],
               "columns": [
+                  { "data": "id", "visible": false},
                   { "data": "person.name" },
                   { "data": "person.phone"},
                   { "data": "immediateFamily.name"},
                   { "data": "immediateFamily.phone"},
-                  { "data": "entryDate"},
-                  { "data": "exitDate"},
+                  { "data": "entryDate", 
+                    "render": function ( data, type, full, meta ) {
+                      return (new Date(data));
+                    }
+                  },
+                  { "data": "exitDate",
+                    "render": function ( data, type, full, meta ) {
+                      return (new Date(data));
+                    }
+                  },
                   { "data": "bucket"},
                   { "data": "failedContactCount"},
                   { "data": "languagePreference"},
@@ -42,7 +52,17 @@ $(document).ready(function() {
             });
             $("#ttkdata .btn-call").on("click", function(event) {
                 event.preventDefault();
-                alert("Call");
+                callHistoryList.empty();
+                var tr = $(this).closest("tr");
+                var patientData = dataTable.row(tr).data()
+                var patientCalls = dataTable.row(tr).data().calls;
+                var calls = patientCalls.map(function(call) {
+                    return "<tr><td>" + (new Date(call.time)) + "</td><td>" + call.response + "</td></tr>";
+                });
+                console.log(calls);
+                callHistoryList.append(calls.join());
+                $('#phoneNumberPK').val(patientData.person.phone);
+                $('#callHistoryModal').modal('toggle');
             });  
             $("#ttkdata .btn-edit").on("click", function(event) {
                 event.preventDefault();
