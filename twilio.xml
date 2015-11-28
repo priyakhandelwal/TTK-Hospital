@@ -5,6 +5,8 @@
             Please enter your account number,
             followed by the pound sign
         </Say>
+    <Pause length="30"/>
     </Gather>
+    <Pause length="30"/>
     <Say>We didn't receive any input. Goodbye!</Say>
 </Response>
