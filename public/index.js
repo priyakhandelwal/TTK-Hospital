@@ -16,12 +16,6 @@ $(document).ready(function() {
               "data": data,
               "order": [],
               "columns": [
-                  {
-                    "className": "call-history-icon",
-                    "data": null,
-                    "orderable": false,
-                    "defaultContent": ""
-                  }
                   { "data": "person.name" },
                   { "data": "person.phone"},
                   { "data": "immediateFamily.name"},
@@ -34,18 +28,26 @@ $(document).ready(function() {
                   {
                     "data": "",
                     "render": function ( data, type, full, meta ) {
-                            return '<a class="btn btn-info btn-sm" href=#/' + full[0] + '>' + 'Calls' + '</a>';
+                            return '<a class="btn btn-info btn-sm btn-call" href=#/' + full[0] + '>' + 'Calls' + '</a>';
                     }
                   },
                   { "data": "",
                     "render": function ( data, type, full, meta ) {
-                            return '<a class="btn btn-info btn-sm" href=#/' + full[0] + '>' + 'Edit' + '</a>';
+                            return '<a class="btn btn-info btn-sm btn-edit" href=#/' + full[0] + '>' + 'Edit' + '</a>';
                     }
                   }
 
               ],
               "iDisplayLength": 15,
             });
+            $("#ttkdata .btn-call").on("click", function(event) {
+                event.preventDefault();
+                alert("Call");
+            });  
+            $("#ttkdata .btn-edit").on("click", function(event) {
+                event.preventDefault();
+                alert("Edit");
+            });
         }
-    });   
+    });
 });
