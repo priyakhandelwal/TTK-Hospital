@@ -5,7 +5,8 @@ var addPatientInfo = require('../middleware/addPatientInfo');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  //res.render('index', { title: 'Express' });
+  res.sendFile(__dirname + "../public/index.html");
 });
 
 
