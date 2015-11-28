@@ -16,6 +16,12 @@ $(document).ready(function() {
               "data": data,
               "order": [],
               "columns": [
+                  {
+                    "className": "call-history-icon",
+                    "data": null,
+                    "orderable": false,
+                    "defaultContent": ""
+                  }
                   { "data": "person.name" },
                   { "data": "person.phone"},
                   { "data": "immediateFamily.name"},

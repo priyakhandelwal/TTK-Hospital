@@ -27,8 +27,12 @@ router.post('/people', function(req, res, next){
 			patientMiddleware.edit(req, res);
 });
 
-router.post('/call', function(req, res, next){
+router.post('/updateCall', function(req, res, next){
 	callUpdateMiddleware.updateCall(req, res);
+});
+
+router.get('/getCallHistory/:id', function(req, res, next){
+	callUpdateMiddleware.getCallHistory(req, res);
 });
 
 router.get('/fetchAllData', function(req, res, next){

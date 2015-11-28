@@ -33,4 +33,17 @@ exports.updateCall = function(req, res) {
 			});
 		}
 	});
-}
+};
+
+exports.getCallHistory = function(req, res) {
+	var patiendId = req.params.id;
+	people.findOne({"id": patiendId}, function(err, data) {
+		if(err) {
+			console.log(err);
+			res.send({success: false, msg: "No row found error"});
+		} else {
+			console.log(data.calls);
+			res.send(data.calls);
+		}
+	});
+};
