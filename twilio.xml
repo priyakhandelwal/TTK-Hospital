@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-        <Pause length="20"/>
-        <Say voice="woman">Hi!</Say>
+        <Pause length="20000"/>
+        <Say voice="woman">Hi Hello how are you!</Say>
         
 </Response>
