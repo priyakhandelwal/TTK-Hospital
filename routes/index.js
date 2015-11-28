@@ -6,7 +6,8 @@ var patientMiddleware = require('../middleware/people');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //res.render('index', { title: 'Express' });
-  res.sendFile(__dirname + "../public/index.html");
+
+ res.sendFile(__dirname + "../public/index.html");
 });
 
 
@@ -25,4 +26,8 @@ router.post('/people', function(req, res, next){
 			patientMiddleware.edit(req, res);
 });
 
+router.get('/fetchAllData', function(req, res, next){
+	console.log("inside fetch all data");
+	 patientMiddleware.fetchAllData(req, res);
+});
 module.exports = router;

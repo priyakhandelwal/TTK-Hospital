@@ -1,58 +1,42 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="stylesheets/style.css"/>
-	<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css"/>
+	
 	<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+  	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+  
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.css" media="screen" />
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"/>
 	<script type="text/javascript" charset="utf8" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css"/>
+	<script type="text/javascript" src="index.js"></script>
 	</head>
 	<body>
 
 
-
-<!-- Button trigger modal -->
-<button data-toggle="modal" data-target="#addNewRecordForm">
-    Add New Record
-</button>
-
-
-		<table id="ttkdata" class="ttkdata">
-   			<thead>
-      			<tr>
-      				<th>Name</th>
-      				<th>Phone number</th>
-      				<th>Address</th>
-      				<th>Relative's name</th>
-      				<th>Last call</th>
-      			</tr>
-    		</thead>
-		    <tbody>
-				<tr>
-					<td>Faiz</td>
-					<td>123456789</td>
-					<td>Navlur</td>
-					<td>Shakti</td>
-					<td>2015-04-12</td>
-				</tr>
-				<tr>
-					<td>Swati</td>
-					<td>987654321</td>
-					<td>Thoraipakkam</td>
-					<td>Shakti</td>
-					<td>2015-07-12</td>
-				</tr>
-				<tr>
-					<td>Sanchit</td>
-					<td>988257321</td>
-					<td>Adyar</td>
-					<td>Shakti</td>
-					<td>2014-04-12</td>
-				</tr>
-		   	</tbody>
-  		</table>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<!-- Button trigger modal -->
+			<button data-toggle="modal" data-target="#addNewRecordForm">
+			    Add New Record
+			</button>
+			<table id="ttkdata" class="table table-striped main">
+	   			<thead>
+	  				<td>Name</td>
+	  				<td>Phone number</td>
+	  				<td>Relative's Name</td>
+	  				<td>Relative's Phone Number</td>
+	  				<td>Entry Date</td>
+	  				<td>Exit Date</td>
+	  				<td>Bucket</td>
+	  				<td>Failed Contact Count</td>
+	  				<td>Language Preference</td>
+	    		</thead>
+	  		</table>
+	  	</div>
+  	</div>
 
   		<!-- Modal -->
 <div class="modal fade" id="addNewRecordForm" tabindex="-1" role="dialog" 

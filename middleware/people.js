@@ -70,7 +70,7 @@ exports.addNewPersonInformation = function(req, res){
 			phone: immediateFamilyPhone
 		},
 		entryDate : entryDate,
-		exitData : exitDate,
+		exitDate : exitDate,
 		bucket : bucket,
 		languagePreference : languagePreference,
 		failedContactCount : failedContactCount
@@ -80,12 +80,13 @@ exports.addNewPersonInformation = function(req, res){
 
 	patientInfo.save(function(err, savedObject){
 		if(err){
-			console.log("Error creating a new patient record");
+			console.log("Error creating a new patient record " + err);
 			res.send({success : false, msg: "DB error"});
 		}
 		else{
 			console.log("Patient record created" + savedObject);
-			res.send({success : true});
+			//res.send({success : true});
+			res.redirect('/index.html');
 		}
 	});
 };
@@ -139,7 +140,7 @@ exports.edit = function(req, res){
 			phone: immediateFamilyPhone
 		},
 		entryDate : entryDate,
-		exitData : exitDate,
+		exitDate : exitDate,
 		bucket : bucket,
 		languagePreference : languagePreference,
 		failedContactCount : failedContactCount
@@ -155,5 +156,19 @@ exports.edit = function(req, res){
 	    res.send("succesfully saved");
 	});
 	console.log(updateData);
+
+}
+
+exports.fetchAllData = function(req, res){
+	
+	people.find({}, function(err, data){
+		if(err){
+			console.log("DB error while fetching all data\n");
+			res.send({success: false, msg: "DB Error"});
+		} else{
+			console.log({data: data});
+			res.send(data);
+		}
+	});
 
 }
