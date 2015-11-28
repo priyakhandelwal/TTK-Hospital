@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var peopleModel = require('../model/people');
 var patientMiddleware = require('../middleware/people');
+var callUpdateMiddleware = require('../middleware/call');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -23,6 +24,10 @@ router.post('/people', function(req, res, next){
 	else
 		if(requestType == "edit")
 			patientMiddleware.edit(req, res);
+});
+
+router.post('/call', function(req, res, next){
+	callUpdateMiddleware.updateCall(req, res);
 });
 
 module.exports = router;
