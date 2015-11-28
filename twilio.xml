@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-        <Gather timeout="100" finishOnKey="*">
         <Say> Please ......................... enter your pin number and then press star. Please enter your pin number and then press star. Please enter your pin number and then press star..............................................</Say>
-        </Gather>
+        <Pause length="10" />
+        <Say> Please ......................... enter your pin number and then press star. Please enter your pin number and then press star. Please enter your pin number and then press star..............................................</Say>
+        <Pause length="10" />
+        <Say>Hellooo</Say>
 </Response>
