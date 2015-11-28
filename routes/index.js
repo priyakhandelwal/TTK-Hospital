@@ -33,11 +33,12 @@ router.post('/people', function(req, res, next) {
         patientMiddleware.edit(req, res);
 });
 
-router.post('/callXml/:level', function(req, res, next) {
+router.post('/callxml/:calltype/:level', function(req, res, next) {
+	console.log("%j %j", req.params, ivrConfig[parseInt(req.params.level)]);
     var response = plivo.Response();
-    response.addSpeak(ivrConfig[parseInt(req.params.level)].message);
+    response.addSpeak(ivrConfig[parseInt(req.params.level)].message[req.params.calltype]);
     var getDigits = response.addGetDigits({
-        action: '/logCallResponse',
+        action: '/logCallResponse/' + req.params.calltype,
         method: 'GET',
         numDigits: 1,
         timeout: 10,
@@ -48,7 +49,7 @@ router.post('/callXml/:level', function(req, res, next) {
     res.end(response.toXML());
 });
 
-router.get('/logCallResponse/', function(req, res, next) {
+router.get('/logCallResponse/:type', function(req, res, next) {
     var response = plivo.Response();
     console.log("%j", req.query);
     response.addSpeak('Your response has been noted. Thanks for your feedback.');
