@@ -40,6 +40,7 @@ exports.addNewPersonInformation = function(req, res){
 	console.log(entryDate);
 	//var entryDate = 109029090210;
 	var exitDate = moment(req.body.exitDate, 'YYYY-MM-DD').unix();
+	var nextCallDate = exitDate + 604800;
 	console.log(exitDate);
 	//var exitDate = 1912910290293;
 	var bucket = req.body.bucket || null;
@@ -73,7 +74,8 @@ exports.addNewPersonInformation = function(req, res){
 		exitDate : exitDate,
 		bucket : bucket,
 		languagePreference : languagePreference,
-		failedContactCount : failedContactCount
+		failedContactCount : failedContactCount,
+		nextCallDate: nextCallDate
 	});
 
 	console.log(patientInfo);
@@ -111,11 +113,14 @@ exports.edit = function(req, res){
 	var personPhone = req.body.personPhone || null;
 	var immediateFamilyName = req.body.immediateFamilyName || null;
 	var immediateFamilyPhone = req.body.immediateFamilyPhone || null;
-	var entryDate = req.body.entryDate || null;
-	var exitDate = req.body.exitDate || null;
+	var entryDate = moment(req.body.entryDate, 'YYYY-MM-DD').unix();
+	console.log(entryDate);
+	//var entryDate = 109029090210;
+	var exitDate = moment(req.body.exitDate, 'YYYY-MM-DD').unix();
+	console.log(exitDate);
 	var bucket = req.body.bucket || null;
 	var languagePreference = req.body.languagePreference || null;
-	var id = uuid.v1();
+	var id = req.body.id || null;
 
 	if(personName == null || personPhone == null){
 		console.log("Incomplete patient information\n");
@@ -142,8 +147,7 @@ exports.edit = function(req, res){
 		entryDate : entryDate,
 		exitDate : exitDate,
 		bucket : bucket,
-		languagePreference : languagePreference,
-		failedContactCount : failedContactCount
+		languagePreference : languagePreference
 	};
 
 
@@ -170,5 +174,35 @@ exports.fetchAllData = function(req, res){
 			res.send(data);
 		}
 	});
-
 }
+
+ exports.deleteRecord = function(req, res){
+ 	console.log("Called + "  + req.query.id);
+ 	var id = req.query.id;
+ 	people.find({id: id}, function(err, patient){
+ 		if(err){
+ 			 console.log(err);
+ 			res.send({success: false, msg: "DB error"});
+ 			return;
+ 		}
+ 		else {
+ 			if(patient){
+ 			console.log(patient);
+ 			people.remove({id: id}, function(err){
+ 			if(err){
+ 				console.log("Error removing record from DB");
+ 				res.send({success: false, msg: "DB Error"});
+ 			} else {
+ 				console.log("record removed");
+ 				res.send({success: true});
+ 			}
+ 			});
+ 		}
+ 		else{
+ 			res.send({success: false, msg: "No record with this ID exists"});
+ 		}
+
+ 		}
+ 	});
+ 	
+ }
