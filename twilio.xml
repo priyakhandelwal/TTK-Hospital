@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Gather action="http://kanpurdeals.com/ohack/index.php" numDigits="1" timeout="30" method="POST">
+    <Gather action="http://kanpurdeals.com/ohack/index.php" numDigits="1" timeout="60" method="POST">
       <Say>
            Alcohol abuse call.  Please enter 1 for OK and 2 for NOT OK and 3 for I need help.
         </Say>
