@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Gather action="http://kanpurdeals.com/ohack/" method="GET">
-        <Say>
-            Please enter your account number,
-            followed by the pound sign
-        </Say>
-    <Pause length="30"/>
+    <Gather timeout="30" finishOnKey="*">
+        <Say>Please enter your pin number and then press star.</Say>
     </Gather>
-    <Pause length="30"/>
-    <Say>We didn't receive any input. Goodbye!</Say>
 </Response>
