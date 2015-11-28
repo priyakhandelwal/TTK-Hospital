@@ -170,5 +170,33 @@ exports.fetchAllData = function(req, res){
 			res.send(data);
 		}
 	});
-
 }
+
+ exports.deleteRecord = function(req, res){
+ 	var id = req.query.id;
+ 	people.find({id: id}, function(err, patient){
+ 		if(err){
+ 			res.send({success: false, msg: "DB error"});
+ 			return;
+ 		}
+ 		else {
+ 			if(patient){
+ 			console.log(patient);
+ 			people.remove({id: id}, function(err){
+ 			if(err){
+ 				console.log("Error removing record from DB");
+ 				res.send({success: false, msg: "DB Error"});
+ 			} else {
+ 				console.log("record removed");
+ 				res.send({success: true});
+ 			}
+ 			});
+ 		}
+ 		else{
+ 			res.send({success: false, msg: "No record with this ID exists"});
+ 		}
+
+ 		}
+ 	});
+ 	
+ }
