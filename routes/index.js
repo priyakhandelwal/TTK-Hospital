@@ -33,10 +33,10 @@ router.post('/people', function(req, res, next) {
         patientMiddleware.edit(req, res);
 });
 
-router.post('/callxml/:calltype/:level', function(req, res, next) {
+router.post('/callxml/:lang/:calltype/:level', function(req, res, next) {
 	console.log("%j %j", req.params, ivrConfig[parseInt(req.params.level)]);
     var response = plivo.Response();
-    response.addSpeak(ivrConfig[parseInt(req.params.level)].message[req.params.calltype]);
+    response.addSpeak(ivrConfig[parseInt(req.params.level)].message[req.params.lang][req.params.calltype]);
     var getDigits = response.addGetDigits({
         action: '/logCallResponse/' + req.params.calltype,
         method: 'GET',
