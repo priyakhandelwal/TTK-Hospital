@@ -32,6 +32,7 @@ function toDateYYYYMMDD(secs)
 $(document).ready(function() {
 
     console.log("Hello");
+
     $.ajax({
         url: "/fetchAllData",
         //force to handle it as text

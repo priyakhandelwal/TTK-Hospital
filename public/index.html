@@ -11,6 +11,34 @@
 	<script type="text/javascript" charset="utf8" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css"/>
 	<script type="text/javascript" src="index.js"></script>
+	<script>
+	toBeDeletedId = null;
+	function deleteRecord(id){
+		console.log("Inside function deleteRecord");
+		console.log("ID is " + id);
+		$('#deleteRecordModal').modal('show'); 
+		toBeDeletedId = id;
+	}
+
+	function deleteAjax(){
+		console.log("Inside Delete");
+		console.log("ID value is "+toBeDeletedId);
+		  var query = "id=" + toBeDeletedId;
+		  $.ajax({
+          url: "/deleteRecord?" + query,
+          //force to handle it as text
+          dataType: "text",
+
+          success: function(data){
+          		location.reload();
+          },
+          error: function() {
+        		$('#errorDeleteRecordModal').modal('show'); 
+          }
+
+        });
+	}
+	</script>
 	</head>
 	<body>
 
@@ -40,7 +68,55 @@
 	  	</div>
   	</div>
 
-  		<!-- Modal -->
+
+<!-- Error Alert Modal -->
+<div id="errorDeleteRecordModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <!-- <form role="form" method="POST" action="/deleteRecord"> -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Error Occured While Deleting This Record</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete Record -->
+<div id="deleteRecordModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <!-- <form role="form" method="POST" action="/deleteRecord"> -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the record?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <!-- <input type="hidden" value="id" name="id"> -->
+        <button type="button" class="btn btn-primary" onclick="deleteAjax()" data-dismiss="modal">Yes</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+
+  		<!--Add New Patient Record Modal -->
 <div class="modal fade" id="addNewRecordForm" tabindex="-1" role="dialog" 
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
