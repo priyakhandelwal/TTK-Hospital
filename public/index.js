@@ -1,6 +1,8 @@
+
 $(document).ready(function() {
 
     console.log("Hello");
+
     $.ajax({
         url: "/fetchAllData",
         //force to handle it as text
@@ -33,7 +35,9 @@ $(document).ready(function() {
                   },
                   { "data": "",
                     "render": function ( data, type, full, meta ) {
-                            return '<a class="btn btn-info btn-sm" href=#/' + full[0] + '>' + 'Edit' + '</a>';
+                            console.log("FULL");
+                            console.log(full[0]);
+                            return '<a class="btn btn-info btn-sm" href=# >' + 'Edit' + '</a>';
                     }
                   }
 

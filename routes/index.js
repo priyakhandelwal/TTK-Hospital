@@ -65,4 +65,9 @@ router.get('/fetchAllData', function(req, res, next) {
     console.log("inside fetch all data");
     patientMiddleware.fetchAllData(req, res);
 });
+
+router.get('/deleteRecord', function(req, res, next){
+	patientMiddleware.deleteRecord(req, res);
+});
+
 module.exports = router;
