@@ -14,6 +14,34 @@ function editButtonPressed(data){
     $("#id").val(data.id);
 }
 
+
+    toBeDeletedId = null;
+    function deleteRecord(id){
+        console.log("Inside function deleteRecord");
+        console.log("ID is " + id);
+        $('#deleteRecordModal').modal('show'); 
+        toBeDeletedId = id;
+    }
+
+    function deleteAjax(){
+        console.log("Inside Delete");
+        console.log("ID value is "+toBeDeletedId);
+          var query = "id=" + toBeDeletedId;
+          $.ajax({
+          url: "/deleteRecord?" + query,
+          //force to handle it as text
+          dataType: "text",
+
+          success: function(data){
+                location.reload();
+          },
+          error: function() {
+                $('#errorDeleteRecordModal').modal('show'); 
+          }
+
+        });
+    }
+
 function toDate(secs)
 {
   var t = new Date(1970,0,1);
@@ -74,7 +102,8 @@ $(document).ready(function() {
                   { "data": "",
                     "render": function ( data, type, full, meta ) {
                         console.log(full);
-                        return "<a class='btn btn-info btn-sm' href=# onclick=editButtonPressed(\'" + JSON.stringify(full) + "\')>" + 'Edit' + '</a>' + '<a class="btn btn-danger btn-sm" href=#/' + full[0] + '>' + 'Delete' + '</a>';
+                        console.log(full["id"]);
+                        return "<a class='btn btn-info btn-sm' href=# onclick=editButtonPressed(\'" + JSON.stringify(full) + "\')>" + 'Edit' + '</a>' + '<a class="btn btn-danger btn-sm" href=# onclick=deleteRecord("' + full["id"] + '")>Delete</a>';
                     }
                   }
 

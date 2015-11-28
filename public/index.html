@@ -11,41 +11,16 @@
 	<script type="text/javascript" charset="utf8" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css"/>
 	<script type="text/javascript" src="index.js"></script>
-	<script>
-	toBeDeletedId = null;
-	function deleteRecord(id){
-		console.log("Inside function deleteRecord");
-		console.log("ID is " + id);
-		$('#deleteRecordModal').modal('show'); 
-		toBeDeletedId = id;
-	}
-
-	function deleteAjax(){
-		console.log("Inside Delete");
-		console.log("ID value is "+toBeDeletedId);
-		  var query = "id=" + toBeDeletedId;
-		  $.ajax({
-          url: "/deleteRecord?" + query,
-          //force to handle it as text
-          dataType: "text",
-
-          success: function(data){
-          		location.reload();
-          },
-          error: function() {
-        		$('#errorDeleteRecordModal').modal('show'); 
-          }
-
-        });
-	}
-	</script>
+	<!-- <script>
+	deleteAjax();
+	</script> -->
 	</head>
 	<body>
 
 
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-12">
 			<!-- Button trigger modal -->
 			<button class="btn btn-primary" data-toggle="modal" data-target="#addNewRecordForm">
 			    Add New Record
@@ -198,5 +173,6 @@
 </div>
 
 	</body>
+	
 
 </html>
