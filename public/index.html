@@ -1,7 +1,24 @@
 <html>
 	<head>
+		<link rel="stylesheet" href="stylesheets/style.css"/>
+	<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css"/>
+	<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"/>
+	<script type="text/javascript" charset="utf8" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css"/>
 	</head>
 	<body>
+
+
+
+<!-- Button trigger modal -->
+<button data-toggle="modal" data-target="#addNewRecordForm">
+    Add New Record
+</button>
+
+
 		<table id="ttkdata" class="ttkdata">
    			<thead>
       			<tr>
@@ -36,10 +53,87 @@
 				</tr>
 		   	</tbody>
   		</table>
+
+  		<!-- Modal -->
+<div class="modal fade" id="addNewRecordForm" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Patient Information
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                
+                <form role="form" method="POST" action="/people">
+                  <div class="form-group">
+                    <label>Patient Name</label>
+                      <input type="text" class="form-control"
+                      name="personName" />
+                  </div>
+                  <div class="form-group">
+                    <label>Patient Phone</label>
+                      <input type="text" class="form-control"
+                          name="personPhone" />
+                  </div>  
+                  <div class="form-group">
+                    <label>Support Name</label>
+                      <input type="text" class="form-control"
+                          name="immediateFamilyName" />
+                  </div>
+                  <div class="form-group">
+                    <label>Support Phone</label>
+                      <input type="text" class="form-control"
+                          name="immediateFamilyPhone" />
+                  </div>
+                  <div class="form-group">
+                    <label>Entry Date</label>
+                      <input type="date" class="form-control"
+                          name="entryDate" />
+                  </div>
+                  <div class="form-group">
+                    <label>Exit Date</label>
+                      <input type="date" class="form-control"
+                          name="exitDate" />
+                  </div>
+                  <div class="form-group">
+                    <label>Bucket</label>
+                      <input type="text" class="form-control"
+                          name="bucket" />
+                  </div>
+                  <div class="form-group">
+                    <label>Language Preference</label>
+                      <input type="text" class="form-control"
+                          name="languagePreference" />
+                  </div>
+
+
+            </div>
+            <input type="hidden" name="action" value="create">
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                            Close
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    Save changes
+                </button>
+            </div>
+           </form>
+        </div>
+    </div>
+</div>
+
 	</body>
-	<link rel="stylesheet" href="stylesheets/style.css"/>
-	<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css"/>
-	<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="index.js"></script>
+
 </html>

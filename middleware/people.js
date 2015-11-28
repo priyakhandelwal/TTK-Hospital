@@ -1,7 +1,7 @@
 'use strict';
 var people = require('../model/people');
 var uuid = require('node-uuid');
-
+var moment = require('moment');
 
 exports.addNewPersonInformation = function(req, res){
 
@@ -10,8 +10,12 @@ exports.addNewPersonInformation = function(req, res){
 	var personPhone = req.body.personPhone || null;
 	var immediateFamilyName = req.body.immediateFamilyName || null;
 	var immediateFamilyPhone = req.body.immediateFamilyPhone || null;
-	var entryDate = req.body.entryDate || null;
-	var exitDate = req.body.exitDate || null;
+	var entryDate = moment(req.body.entryDate, 'YYYY-MM-DD').unix();
+	console.log(entryDate);
+	//var entryDate = 109029090210;
+	var exitDate = moment(req.body.exitDate, 'YYYY-MM-DD').unix();
+	console.log(exitDate);
+	//var exitDate = 1912910290293;
 	var bucket = req.body.bucket || null;
 	var languagePreference = req.body.languagePreference || null;
 	var failedContactCount = 0;
