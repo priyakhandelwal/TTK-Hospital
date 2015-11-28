@@ -5,6 +5,7 @@ var uuid = require('node-uuid');
 
 exports.addNewPatientInformation = function(req, res){
 
+	console.log(req.body);
 	var personName = req.body.personName || null;
 	var personPhone = req.body.personPhone || null;
 	var immediateFamilyName = req.body.immediateFamilyName || null;
