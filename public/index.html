@@ -63,48 +63,49 @@
                 <form role="form" method="POST" action="/people">
                   <div class="form-group">
                     <label>Patient Name</label>
-                      <input type="text" class="form-control"
+                      <input type="text" id="personName" class="form-control"
                       name="personName" />
                   </div>
                   <div class="form-group">
                     <label>Patient Phone</label>
-                      <input type="text" class="form-control"
+                      <input type="text" id="personPhone" class="form-control"
                           name="personPhone" />
                   </div>  
                   <div class="form-group">
                     <label>Support Name</label>
-                      <input type="text" class="form-control"
+                      <input type="text" id="supportName" class="form-control"
                           name="immediateFamilyName" />
                   </div>
                   <div class="form-group">
                     <label>Support Phone</label>
-                      <input type="text" class="form-control"
+                      <input type="text" id="supportPhone" class="form-control"
                           name="immediateFamilyPhone" />
                   </div>
                   <div class="form-group">
                     <label>Entry Date</label>
-                      <input type="date" class="form-control"
+                      <input type="date" id="entryDate" class="form-control"
                           name="entryDate" />
                   </div>
                   <div class="form-group">
                     <label>Exit Date</label>
-                      <input type="date" class="form-control"
+                      <input type="date" id="exitDate" class="form-control"
                           name="exitDate" />
                   </div>
                   <div class="form-group">
                     <label>Bucket</label>
-                      <input type="text" class="form-control"
+                      <input type="text" id="bucket" class="form-control"
                           name="bucket" />
                   </div>
                   <div class="form-group">
                     <label>Language Preference</label>
-                      <input type="text" class="form-control"
+                      <input type="text" id="languagePreference" class="form-control"
                           name="languagePreference" />
                   </div>
 
 
             </div>
-            <input type="hidden" name="action" value="create">
+            <input type="hidden" id="action" name="action" value="create">
+            <input type="hidden" id="id" name="id" value="create">
             <!-- Modal Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default"

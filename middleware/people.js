@@ -111,11 +111,14 @@ exports.edit = function(req, res){
 	var personPhone = req.body.personPhone || null;
 	var immediateFamilyName = req.body.immediateFamilyName || null;
 	var immediateFamilyPhone = req.body.immediateFamilyPhone || null;
-	var entryDate = req.body.entryDate || null;
-	var exitDate = req.body.exitDate || null;
+	var entryDate = moment(req.body.entryDate, 'YYYY-MM-DD').unix();
+	console.log(entryDate);
+	//var entryDate = 109029090210;
+	var exitDate = moment(req.body.exitDate, 'YYYY-MM-DD').unix();
+	console.log(exitDate);
 	var bucket = req.body.bucket || null;
 	var languagePreference = req.body.languagePreference || null;
-	var id = uuid.v1();
+	var id = req.body.id || null;
 
 	if(personName == null || personPhone == null){
 		console.log("Incomplete patient information\n");
@@ -142,8 +145,7 @@ exports.edit = function(req, res){
 		entryDate : entryDate,
 		exitDate : exitDate,
 		bucket : bucket,
-		languagePreference : languagePreference,
-		failedContactCount : failedContactCount
+		languagePreference : languagePreference
 	};
 
 
