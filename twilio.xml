@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Gather timeout="10000" numDigits="1">
-        <Say>Please press any key to continue.</Say>
-    </Gather>
+    <Say>Please press any key to continue.</Say>
+    <Gather timeout="10000" numDigits="1" />
+    <Say>Good bye!.</Say>
 </Response>
