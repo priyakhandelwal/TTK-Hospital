@@ -2,7 +2,7 @@
 var people = require('../model/people');
 
 
-exports.updateCall = function(req, res) {
+function updateCall(req, res) {
 	console.log(req.body);
 	function getParam(key) {
 		return req.body[key] || null;
@@ -10,27 +10,58 @@ exports.updateCall = function(req, res) {
 	var phoneNumber = getParam("phoneNumber");
 	var response = getParam("response");
 	var success = getParam("success");
+	var type =	getParam("type");
 
 	if((phoneNumber && response && success) == null) {
 		res.send({success: false, msg: "Incomplete call related information"});
 	}
-	people.findOne({"person.phone": phoneNumber}, function(err, data) {
-		if(err) {
-			console.log(err);
-			res.send({success: false, msg: "No row found error"});
+
+	var insertObj = {time: Date.now(), response: response, type: type};
+	checkAndInsert(phoneNumber, insertObj, success, function(resBody){
+		res.send(resBody);
+	});
+}
+
+function checkAndInsert(phoneNumber, insertObj, success, callback){
+	var findQuery = {};
+	if(insertObj.type == "self"){
+		findQuery = {"person.phone": phoneNumber};
+	}
+	else
+		if(insertObj.type == "relative"){
+			console.log("relative");
+			findQuery = {"immediateFamily.phone": phoneNumber};
+		}
+	people.findOne(findQuery, function(err, data) {
+		if(err || data == null) {
+			if(err){
+				console.log(err);
+				callback({success: false, msg: "Unknown error"});
+			}
+			else{
+				console.log("No row found");
+				callback({success: false, msg: "No row found error"});
+			}
+			
 		} else {
 			console.log(data);
-			data.calls.push({time: Date.now(), response: response});
+			data.calls.push(insertObj);
 			if(success == true) {
 				data.failedContactCount = 0;
 			}
 			data.save(function(err) {
 				if(err) {
-					res.send({success: false, msg: "No row update error"});
+					console.log(err);
+					callback({success: false, msg: "No row update error"});
 				} else {
-					res.send({success: true});
+					callback({success: true});
 				}
 			});
 		}
 	});
+}
+
+module.exports = {
+	updateCall: updateCall,
+	checkAndInsert: checkAndInsert
 }

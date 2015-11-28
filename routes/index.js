@@ -52,6 +52,16 @@ router.post('/callxml/:calltype/:level', function(req, res, next) {
 router.get('/logCallResponse/:type', function(req, res, next) {
     var response = plivo.Response();
     console.log("%j", req.query);
+    var phoneNumber = req.query.To.substr(2);
+    var digit = req.query.digit;
+    var type = req.params.type;
+    var success = true;
+    var insertObj = {time: Date.now(), response: digit, type: type};
+    console.log(type);
+    callUpdateMiddleware.checkAndInsert(phoneNumber, insertObj, success, function(responseObj){
+    	console.log(responseObj);
+    });
+
     response.addSpeak('Your response has been noted. Thanks for your feedback.');
     res.set('Content-Type', 'text/plain');
     res.end(response.toXML());
