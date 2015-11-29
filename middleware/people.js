@@ -121,7 +121,7 @@ exports.edit = function(req, res){
 	var bucket = req.body.bucket || null;
 	var languagePreference = req.body.languagePreference || null;
 	var id = req.body.id || null;
-
+	console.log("PAPAP" + id);
 	if(personName == null || personPhone == null){
 		console.log("Incomplete patient information\n");
 		res.send({success: false, msg: "Incomplete patient information"});
@@ -134,7 +134,7 @@ exports.edit = function(req, res){
 		return;
 	}
 
-	var updateData = {
+	var updateData = new people({
 		id : id,
 		person : {
 			name : personName,
@@ -148,15 +148,25 @@ exports.edit = function(req, res){
 		exitDate : exitDate,
 		bucket : bucket,
 		languagePreference : languagePreference
-	};
+	});
 
 
-	people.findOneAndUpdate({id: id}, updateData, {upsert:true}, function(err, doc){
+	people.findOne({id: id}, function(err, doc){
 	    if (err){
 	    	console.log(err);
 	    	res.send({success: false, msg: "update query failed"});
 	    	return;
-	    } 
+	    }
+	    doc.person.name = personName;
+	    doc.person.phone = personPhone;
+	    doc.immediateFamily.name = immediateFamilyName;
+	    doc.immediateFamily.phone = immediateFamilyPhone;
+	    doc.entryDate = entryDate;
+	    doc.exitDate = exitDate;
+	    doc.bucket = bucket;
+	    doc.languagePreference = languagePreference;
+	    console.log(doc);
+	    doc.save();
 	    res.send("succesfully saved");
 	});
 	console.log(updateData);
