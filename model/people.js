@@ -50,6 +50,9 @@ var peopleModel = function() {
             },
             responder: {
                 type: String
+            },
+            bucket: {
+                type: Number
             }
         }],
         nextCallDate: {
