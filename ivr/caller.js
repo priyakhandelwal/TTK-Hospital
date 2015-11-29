@@ -43,18 +43,18 @@ function makeCalls(peopleArr) {
 					console.log("Daily call record created " + savedObject);
 				}
 			});
-            params = {
-                from: config.from,
-                to: '+91' + peopleArr[i].person.phone,
-                answer_url: hostConfig.hostname + peopleArr[i].languagePreference + '/self/' + peopleArr[i].bucket, // /call/:lang/:type/:level  eg //call/tamil/relative/0
-            };
-            api.make_call(params, logCallResponse);
-            params = {
-                from: config.from,
-                to: '+91' + peopleArr[i].immediateFamily.phone,
-                answer_url: hostConfig.hostname + peopleArr[i].languagePreference + '/relative/' + peopleArr[i].bucket, // /call/:lang/:type/:level  eg //call/tamil/relative/0
-            };
-            api.make_call(params, logCallResponse);
+            // params = {
+            //     from: config.from,
+            //     to: '+91' + peopleArr[i].person.phone,
+            //     answer_url: hostConfig.hostname + peopleArr[i].languagePreference + '/self/' + peopleArr[i].bucket, // /call/:lang/:type/:level  eg //call/tamil/relative/0
+            // };
+            // api.make_call(params, logCallResponse);
+            // params = {
+            //     from: config.from,
+            //     to: '+91' + peopleArr[i].immediateFamily.phone,
+            //     answer_url: hostConfig.hostname + peopleArr[i].languagePreference + '/relative/' + peopleArr[i].bucket, // /call/:lang/:type/:level  eg //call/tamil/relative/0
+            // };
+            // api.make_call(params, logCallResponse);
         }
     }
 }

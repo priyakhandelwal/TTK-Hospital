@@ -36,7 +36,7 @@ var peopleModel = function() {
             type: Number
         },
         status:{
-            type: String
+            type: Number
         },
         languagePreference: {
             type: String

@@ -34,23 +34,29 @@ function processPersonCallRecords(person) {
         i;
     var today = moment().format("MM/DD/YY");
     var updateObj = {};
-    if (moment(calls[calls.length - 1].time).format("MM/DD/YY") !== today) {
+    if(calls.length == 0){
         updateObj.failedContactCount = person.failedContactCount + 1;
-    } else {
-        var status1 = calls[calls.length - 1].response;
-        var status2 = 0;
-        if (calls.length > 1 && moment(calls[calls.length - 2].time).format("MM/DD/YY") === today) {
-            //Last 2 calls have been successful and been made today
-            status2 = calls[calls.length - 2].response;
+    }
+    else{
+        if (moment(calls[calls.length - 1].time).format("MM/DD/YY") !== today) {
+            console.log("For " + person.person.phone + " no call today");
+            updateObj.failedContactCount = person.failedContactCount + 1;
+        } else {
+            var status1 = calls[calls.length - 1].response;
+            var status2 = 0;
+            if (calls.length > 1 && moment(calls[calls.length - 2].time).format("MM/DD/YY") === today) {
+                //Last 2 calls have been successful and been made today
+                status2 = calls[calls.length - 2].response;
+            }
+            updateObj.status = Math.max(status1, status2);
         }
-        updateObj.status = Math.max(status1, status2);
+
+        for (i = 0; i < calls.length; i++) {
+
+        }
     }
-
-    for (i = 0; i < calls.length; i++) {
-
-    }
-
-    MetaDataModel.findOneAndUpdate({
+    console.log(updateObj);
+    people.findOneAndUpdate({
         id: person.id
     }, {
         $set: updateObj
