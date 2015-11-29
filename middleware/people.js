@@ -166,11 +166,8 @@ exports.edit = function(req, res){
 	    console.log(doc);
 	    doc.save();
 	    res.redirect('/index.html');
-	    } 
-	    //res.send("succesfully saved");
+	    console.log(updateData);
 	});
-	console.log(updateData);
-
 }
 
 exports.fetchAllData = function(req, res){
@@ -184,7 +181,7 @@ exports.fetchAllData = function(req, res){
 			res.send(data);
 		}
 	});
-}
+};
 
  exports.deleteRecord = function(req, res){
  	console.log("Called + "  + req.query.id);
@@ -197,22 +194,17 @@ exports.fetchAllData = function(req, res){
  		}
  		else {
  			if(patient){
- 			console.log(patient);
- 			people.remove({id: id}, function(err){
- 			if(err){
- 				console.log("Error removing record from DB");
- 				res.send({success: false, msg: "DB Error"});
- 			} else {
- 				console.log("record removed");
- 				res.send({success: true});
+	 			console.log(patient);
+	 			people.remove({id: id}, function(err){
+		 			if(err){
+		 				console.log("Error removing record from DB");
+		 				res.send({success: false, msg: "DB Error"});
+		 			} else {
+		 				console.log("record removed");
+		 				res.send({success: true});
+		 			}
+	 			});
  			}
- 			});
- 		}
- 		else{
- 			res.send({success: false, msg: "No record with this ID exists"});
- 		}
-
  		}
  	});
- 	
- }
+ };

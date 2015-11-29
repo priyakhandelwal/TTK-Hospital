@@ -103,9 +103,9 @@ $(document).ready(function() {
                   },
                   { "data": "",
                     "render": function ( data, type, full, meta ) {
-                            return '<a class="btn btn-info btn-sm btn-edit" href=#/' + full[0] + '>' + 'Edit' + '</a>';
-                        console.log(full);
-                        console.log(full["id"]);
+            //           return '<a class="btn btn-info btn-sm btn-edit" href=#/' + full[0] + '>' + 'Edit' + '</a>';
+              //          console.log(full);
+               //         console.log(full["id"]); 
                         return "<a class='btn btn-info btn-sm' href=# onclick=editButtonPressed(event) data-info='" + JSON.stringify(full) + "'>" + 'Edit' + '</a>' + '<a class="btn btn-danger btn-sm" href=# onclick=deleteRecord("' + full["id"] + '")>Delete</a>';
                     }
                   }
