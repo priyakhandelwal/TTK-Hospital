@@ -3,6 +3,7 @@ var router = express.Router();
 var peopleModel = require('../model/people');
 var patientMiddleware = require('../middleware/people');
 var callUpdateMiddleware = require('../middleware/call');
+var hostConfig = require('../ivr/hostConfig.js');
 
 var plivo = require('plivo');
 var ivrConfig = require('../ivr/ivrConfig.js');
@@ -39,7 +40,7 @@ router.post('/callxml/:lang/:calltype/:level', function(req, res, next) {
     var response = plivo.Response();
     response.addSpeak(ivrConfig[parseInt(req.params.level)].message[req.params.lang][req.params.calltype]);
     var getDigits = response.addGetDigits({
-        action: '/logCallResponse/' + req.params.calltype,
+        action: hostConfig.hostname + 'logCallResponse/' + req.params.calltype,
         method: 'GET',
         numDigits: 1,
         timeout: 10,
@@ -54,7 +55,7 @@ router.get('/logCallResponse/:type', function(req, res, next) {
     var response = plivo.Response();
     console.log("%j", req.query);
     var phoneNumber = req.query.To.substr(2);
-    var digit = req.query.digit;
+    var digit = req.query.Digits;
     var type = req.params.type;
     var success = true;
     var insertObj = {time: Date.now(), response: digit, responder: type};
