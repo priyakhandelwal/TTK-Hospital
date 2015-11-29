@@ -17,7 +17,7 @@ public class NetClientPost extends AsyncTask<String, Void, String>{
     protected String doInBackground(String[] params) {
         try {
 
-            URL url = new URL("http://192.168.122.0:8080/calllog");
+            URL url = new URL("http://54.213.224.119:8080/calllog");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
