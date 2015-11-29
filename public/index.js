@@ -1,5 +1,5 @@
-function editButtonPressed(data){
-    data = JSON.parse(data);
+function editButtonPressed(event){
+    data = JSON.parse($(event.target).attr("data-info"));
     $('#addNewRecordForm').modal('show');
     $("#personName").val(data.person.name);
     $("#personPhone").val(data.person.phone);
@@ -106,7 +106,7 @@ $(document).ready(function() {
                             return '<a class="btn btn-info btn-sm btn-edit" href=#/' + full[0] + '>' + 'Edit' + '</a>';
                         console.log(full);
                         console.log(full["id"]);
-                        return "<a class='btn btn-info btn-sm' href=# onclick=editButtonPressed(\'" + JSON.stringify(full) + "\')>" + 'Edit' + '</a>' + '<a class="btn btn-danger btn-sm" href=# onclick=deleteRecord("' + full["id"] + '")>Delete</a>';
+                        return "<a class='btn btn-info btn-sm' href=# onclick=editButtonPressed(event) data-info='" + JSON.stringify(full) + "'>" + 'Edit' + '</a>' + '<a class="btn btn-danger btn-sm" href=# onclick=deleteRecord("' + full["id"] + '")>Delete</a>';
                     }
                   }
 
