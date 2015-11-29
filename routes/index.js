@@ -46,7 +46,7 @@ router.post('/callxml/:lang/:calltype/:level', function(req, res, next) {
         timeout: 10,
         retries: 2
     });
-    getDigits.addSpeak('Enter 1,2,3,4,5 Please !!!');
+    getDigits.addSpeak('Enter 1 for Stable, 2 if you need support or 3 if you need personal intervention Please !!!');
     res.set('Content-Type', 'text/plain');
     res.end(response.toXML());
 });
