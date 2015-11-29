@@ -6,6 +6,9 @@ var moment = require('moment');
 var people = require('../model/people');
 var DailyCallsModel = require('../model/dailyCalls');
 
+var ivrConfig = require('./ivrConfig.js');
+
+
 DailyCallsModel.find({}, function(err, data) {
     if (err) {
         console.log("DB error while fetching all data\n");
@@ -34,10 +37,10 @@ function processPersonCallRecords(person) {
         i;
     var today = moment().format("MM/DD/YY");
     var updateObj = {};
-    if(calls.length == 0){
+    updateObj.bucket = person.bucket;
+    if (calls.length == 0) {
         updateObj.failedContactCount = person.failedContactCount + 1;
-    }
-    else{
+    } else {
         if (moment(calls[calls.length - 1].time).format("MM/DD/YY") !== today) {
             console.log("For " + person.person.phone + " no call today");
             updateObj.failedContactCount = person.failedContactCount + 1;
@@ -50,11 +53,17 @@ function processPersonCallRecords(person) {
             }
             updateObj.status = Math.max(status1, status2);
         }
-
-        for (i = 0; i < calls.length; i++) {
-
+        var uniqueDates = {};
+        for (i = calls.length - 1; i >= 0; i--) {
+            if (person.bucket !== calls[i].bucket)
+                break;
+            uniqueDates[calls[i].bucket] = true;
+        }
+        if (person.bucket < ivrConfig.length && Object.keys(uniqueDates).length >= ivrConfig[person.bucket].promotionCount) {
+            updateObj.bucket = person.bucket++;
         }
     }
+    updateObj.nextCallDate = (person.bucket === ivrConfig.length)? 0 : person.nextCallDate + (ivrConfig[updateObj.bucket].callingFrequency * 24 * 60 * 60);
     console.log(updateObj);
     people.findOneAndUpdate({
         id: person.id
