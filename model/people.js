@@ -13,7 +13,7 @@ var peopleModel = function() {
             },
             phone: {
                 type: String
-            }
+            },
         },
         immediateFamily: {
             name: {

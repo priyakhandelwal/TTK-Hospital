@@ -177,9 +177,11 @@ exports.fetchAllData = function(req, res){
 }
 
  exports.deleteRecord = function(req, res){
+ 	console.log("Called + "  + req.query.id);
  	var id = req.query.id;
  	people.find({id: id}, function(err, patient){
  		if(err){
+ 			 console.log(err);
  			res.send({success: false, msg: "DB error"});
  			return;
  		}
