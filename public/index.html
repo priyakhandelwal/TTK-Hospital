@@ -11,9 +11,20 @@
 	<script type="text/javascript" charset="utf8" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css"/>
 	<script type="text/javascript" src="index.js"></script>
-	<!-- <script>
-	deleteAjax();
-	</script> -->
+	<script>
+		function createNewRecord(){
+			$("#personName").val(null);
+    		$("#personPhone").val(null);
+    		$("#supportName").val(null);
+    		$("#supportPhone").val(null);
+    		$("#entryDate").val(null);
+    		$("#exitDate").val(null);
+    		$("#bucket").val(null);
+    		$("#languagePreference").val(null);
+    		$("#action").val("create");
+    		//$("#id").val(data.id);
+		}
+	</script> 
 	</head>
 	<body>
 
@@ -22,7 +33,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-12">
 			<!-- Button trigger modal -->
-			<button class="btn btn-primary" data-toggle="modal" data-target="#addNewRecordForm">
+			<button class="btn btn-primary" data-toggle="modal" data-target="#addNewRecordForm" onclick="createNewRecord()">
 			    Add New Record
 			</button>
 			<table id="ttkdata" class="table table-striped main">
