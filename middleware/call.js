@@ -12,6 +12,8 @@ function updateCall(req, res) {
 	var success = getParam("success");
 	var type =	getParam("type");
 
+	console.log(type);
+
 	if((phoneNumber && response && success) == null) {
 		res.send({success: false, msg: "Incomplete call related information"});
 		return;
@@ -19,7 +21,8 @@ function updateCall(req, res) {
 
 	var insertObj = {time: Date.now(), response: response, responder: type};
 	checkAndInsert(phoneNumber, insertObj, success, function(resBody){
-		res.send(resBody);
+		//res.send(resBody);
+		res.redirect("/index.html");
 	});
 }
 
@@ -46,6 +49,7 @@ function checkAndInsert(phoneNumber, insertObj, success, callback){
 			
 		} else {
 			console.log(data);
+			insertObj.bucket = data.bucket;
 			data.calls.push(insertObj);
 			if(success == true) {
 				data.failedContactCount = 0;
