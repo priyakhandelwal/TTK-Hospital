@@ -48,10 +48,13 @@ var peopleModel = function() {
             response: {
                 type: Number
             },
-            type: {
+            responder: {
                 type: String
             }
-        }]
+        }],
+        nextCallDate: {
+            type: Number
+        }
     });
     return mongoose.model('peopleModel', peopleSchema, 'people');
 }

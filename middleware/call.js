@@ -16,7 +16,7 @@ function updateCall(req, res) {
 		res.send({success: false, msg: "Incomplete call related information"});
 	}
 
-	var insertObj = {time: Date.now(), response: response, type: type};
+	var insertObj = {time: Date.now(), response: response, responder: type};
 	checkAndInsert(phoneNumber, insertObj, success, function(resBody){
 		res.send(resBody);
 	});
@@ -24,11 +24,11 @@ function updateCall(req, res) {
 
 function checkAndInsert(phoneNumber, insertObj, success, callback){
 	var findQuery = {};
-	if(insertObj.type == "self"){
+	if(insertObj.responder == "self"){
 		findQuery = {"person.phone": phoneNumber};
 	}
 	else
-		if(insertObj.type == "relative"){
+		if(insertObj.responder == "relative"){
 			console.log("relative");
 			findQuery = {"immediateFamily.phone": phoneNumber};
 		}
@@ -63,5 +63,19 @@ function checkAndInsert(phoneNumber, insertObj, success, callback){
 
 module.exports = {
 	updateCall: updateCall,
-	checkAndInsert: checkAndInsert
+	checkAndInsert: checkAndInsert,
+	getCallHistory: getCallHistory
 }
+
+function getCallHistory(req, res) {
+	var patiendId = req.params.id;
+	people.findOne({"id": patiendId}, function(err, data) {
+		if(err) {
+			console.log(err);
+			res.send({success: false, msg: "No row found error"});
+		} else {
+			console.log(data.calls);
+			res.send(data.calls);
+		}
+	});
+};

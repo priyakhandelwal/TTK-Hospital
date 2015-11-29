@@ -40,6 +40,7 @@ exports.addNewPersonInformation = function(req, res){
 	console.log(entryDate);
 	//var entryDate = 109029090210;
 	var exitDate = moment(req.body.exitDate, 'YYYY-MM-DD').unix();
+	var nextCallDate = exitDate + 604800;
 	console.log(exitDate);
 	//var exitDate = 1912910290293;
 	var bucket = req.body.bucket || null;
@@ -73,7 +74,8 @@ exports.addNewPersonInformation = function(req, res){
 		exitDate : exitDate,
 		bucket : bucket,
 		languagePreference : languagePreference,
-		failedContactCount : failedContactCount
+		failedContactCount : failedContactCount,
+		nextCallDate: nextCallDate
 	});
 
 	console.log(patientInfo);
@@ -175,9 +177,11 @@ exports.fetchAllData = function(req, res){
 }
 
  exports.deleteRecord = function(req, res){
+ 	console.log("Called + "  + req.query.id);
  	var id = req.query.id;
  	people.find({id: id}, function(err, patient){
  		if(err){
+ 			 console.log(err);
  			res.send({success: false, msg: "DB error"});
  			return;
  		}

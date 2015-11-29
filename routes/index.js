@@ -33,10 +33,10 @@ router.post('/people', function(req, res, next) {
         patientMiddleware.edit(req, res);
 });
 
-router.post('/callxml/:calltype/:level', function(req, res, next) {
+router.post('/callxml/:lang/:calltype/:level', function(req, res, next) {
 	console.log("%j %j", req.params, ivrConfig[parseInt(req.params.level)]);
     var response = plivo.Response();
-    response.addSpeak(ivrConfig[parseInt(req.params.level)].message[req.params.calltype]);
+    response.addSpeak(ivrConfig[parseInt(req.params.level)].message[req.params.lang][req.params.calltype]);
     var getDigits = response.addGetDigits({
         action: '/logCallResponse/' + req.params.calltype,
         method: 'GET',
@@ -56,8 +56,7 @@ router.get('/logCallResponse/:type', function(req, res, next) {
     var digit = req.query.digit;
     var type = req.params.type;
     var success = true;
-    var insertObj = {time: Date.now(), response: digit, type: type};
-    console.log(type);
+    var insertObj = {time: Date.now(), response: digit, responder: type};
     callUpdateMiddleware.checkAndInsert(phoneNumber, insertObj, success, function(responseObj){
     	console.log(responseObj);
     });
@@ -69,6 +68,14 @@ router.get('/logCallResponse/:type', function(req, res, next) {
 
 router.post('/call', function(req, res, next) {
     callUpdateMiddleware.updateCall(req, res);
+});
+
+router.post('/updateCall', function(req, res, next){
+	callUpdateMiddleware.updateCall(req, res);
+});
+
+router.get('/getCallHistory/:id', function(req, res, next){
+	callUpdateMiddleware.getCallHistory(req, res);
 });
 
 router.get('/fetchAllData', function(req, res, next) {
