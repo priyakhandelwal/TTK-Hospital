@@ -25,6 +25,18 @@
     		$("#action").val("create");
     		//$("#id").val(data.id);
 		}
+
+		function validateDates(){
+			var entry = document.getElementById("entryDate").value;
+			var exit = document.getElementById("exitDate").value;
+			console.log("Entry "+entry);
+			console.log("Exit "+exit);
+			if(entry > exit){
+				alert("Please enter the dates properly\n");
+				return false;
+			}
+			return true;
+		}
 	</script> 
 	</head>
 	<body>
@@ -126,36 +138,36 @@
             <!-- Modal Body -->
             <div class="modal-body">
                 
-                <form role="form" method="POST" action="/people"> 
+                <form role="form" method="POST" action="/people" onsubmit="return validateDates();"> 
                   <div class="form-group">
                     <label>Patient Name</label>
                       <input type="text" id="personName" class="form-control"
-                      name="personName" />
+                      name="personName" required/>
                   </div>
                   <div class="form-group">
                     <label>Patient Phone</label>
                       <input type="text" id="personPhone" class="form-control"
-                          name="personPhone" />
+                          name="personPhone" pattern="[0-9]{10}" required/>
                   </div>  
                   <div class="form-group">
                     <label>Support Name</label>
                       <input type="text" id="supportName" class="form-control"
-                          name="immediateFamilyName" />
+                          name="immediateFamilyName" required/>
                   </div>
                   <div class="form-group">
                     <label>Support Phone</label>
                       <input type="text" id="supportPhone" class="form-control"
-                          name="immediateFamilyPhone" />
+                          name="immediateFamilyPhone" pattern="[0-9]{10}" required/>
                   </div>
                   <div class="form-group">
                     <label>Entry Date</label>
                       <input type="date" id="entryDate" class="form-control"
-                          name="entryDate" />
+                          name="entryDate" required/>
                   </div>
                   <div class="form-group">
                     <label>Exit Date</label>
                       <input type="date" id="exitDate" class="form-control"
-                          name="exitDate" />
+                          name="exitDate" required/>
                   </div>
                   <div class="form-group">
                     <label>Bucket</label>

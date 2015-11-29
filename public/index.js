@@ -93,9 +93,27 @@ $(document).ready(function() {
                       return toDate(data);
                     }
                   },
-                  { "data": "bucket"},
+                  { "data": "bucket",
+                    "render": function (data, type, full, meta){
+                        if(data == 0)
+                            return "level 0";
+                        if(data == 1)
+                            return "level 1";
+                        if(data == 2)
+                            return "level 2";
+                    }
+                  },
                   { "data": "failedContactCount"},
-                  { "data": "status"},
+                  { "data": "status",
+                    "render": function (data, type, full, meta){
+                        if(data == 1)
+                            return "level 1";
+                        if(data == 2)
+                            return "level 2";
+                        if(data == 3)
+                            return "level 3";
+                    }
+                  },
                   { "data": "nextCallDate",
                     "render": function ( data, type, full, meta ) {
                       return toDate(data/1000);
@@ -114,7 +132,7 @@ $(document).ready(function() {
             //           return '<a class="btn btn-info btn-sm btn-edit" href=#/' + full[0] + '>' + 'Edit' + '</a>';
               //          console.log(full);
                //         console.log(full["id"]); 
-                        return "<a class='btn btn-info btn-sm' href=# onclick=editButtonPressed(event) data-info='" + JSON.stringify(full) + "'>" + 'Edit' + '</a>' + '<a class="btn btn-danger btn-sm" href=# onclick=deleteRecord("' + full["id"] + '")>Delete</a>';
+                        return "<a class='btn btn-info btn-sm' href=# onclick=editButtonPressed(event) data-info='" + JSON.stringify(full) + "'>" + 'Edit' + '</a>&nbsp;' + '<a class="btn btn-danger btn-sm" href=# onclick=deleteRecord("' + full["id"] + '")>Delete</a>';
                     }
                   }
 
