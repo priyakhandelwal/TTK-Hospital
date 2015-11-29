@@ -9,7 +9,7 @@ module.exports = [{
             self: "Tamil: Hi, how  are you self?"
         }
     },
-    callingFrequenglishcy: 7,
+    callingFrequency: 7,
     promotionCount: 4,
 }, {
     message: {
@@ -22,7 +22,7 @@ module.exports = [{
             self: "Tamil: Hi, how  are you self 2.0?"
         }
     },
-    callingFrequenglishcy: 14,
+    callingFrequency: 14,
     promotionCount: 2,
 },{
     message: {
@@ -35,6 +35,6 @@ module.exports = [{
             self: "Tamil: Hi, how  are you self 3.0?"
         }
     },
-    callingFrequenglishcy: 30,
+    callingFrequency: 30,
     promotionCount: 1,
 }];
