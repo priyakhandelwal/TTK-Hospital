@@ -7,6 +7,7 @@ var hostConfig = require('./hostConfig.js');
 var plivo = require('plivo');
 var config = require('./secret.js');
 var people = require('../model/people');
+var DailyCallsModel = require('../model/dailyCalls');
 var api = plivo.RestAPI(config.token);
 
 console.log("a");
@@ -30,6 +31,18 @@ function makeCalls(peopleArr) {
         if ((true || nextCallDate === today) && peopleArr[i].person.name === "Mukesh") { // nextCallDate === today
             console.log(hostConfig.hostname + peopleArr[i].languagePreference + '/self/' + peopleArr[i].bucket);
             console.log(hostConfig.hostname + peopleArr[i].languagePreference + '/relative/' + peopleArr[i].bucket);
+            
+            var dailyCallsModel = new DailyCallsModel();
+            dailyCallsModel.personId = peopleArr[i].id;
+            dailyCallsModel.person = peopleArr[i].person;
+            dailyCallsModel.save(function(err, savedObject){
+				if(err){
+					console.log("Error creating a new daily call record " + err);
+				}
+				else{
+					console.log("Daily call record created " + savedObject);
+				}
+			});
             params = {
                 from: config.from,
                 to: '+91' + peopleArr[i].person.phone,
