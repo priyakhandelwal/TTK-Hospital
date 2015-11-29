@@ -44,6 +44,7 @@ exports.addNewPersonInformation = function(req, res){
 	//var exitDate = 1912910290293;
 	var bucket = req.body.bucket || null;
 	var languagePreference = req.body.languagePreference || null;
+	var status = req.body.status || null;
 	var failedContactCount = 0;
 	var id = uuid.v1();
 
@@ -73,7 +74,8 @@ exports.addNewPersonInformation = function(req, res){
 		exitDate : exitDate,
 		bucket : bucket,
 		languagePreference : languagePreference,
-		failedContactCount : failedContactCount
+		failedContactCount : failedContactCount,
+		status : status
 	});
 
 	console.log(patientInfo);
@@ -117,6 +119,7 @@ exports.edit = function(req, res){
 	var exitDate = moment(req.body.exitDate, 'YYYY-MM-DD').unix();
 	console.log(exitDate);
 	var bucket = req.body.bucket || null;
+	var status = req.body.status || null;
 	var languagePreference = req.body.languagePreference || null;
 	var id = req.body.id || null;
 	console.log("PAPAP" + id);
@@ -145,6 +148,7 @@ exports.edit = function(req, res){
 		entryDate : entryDate,
 		exitDate : exitDate,
 		bucket : bucket,
+		status : status,
 		languagePreference : languagePreference
 	});
 
@@ -162,6 +166,7 @@ exports.edit = function(req, res){
 	    doc.entryDate = entryDate;
 	    doc.exitDate = exitDate;
 	    doc.bucket = bucket;
+	    doc.status = status;
 	    doc.languagePreference = languagePreference;
 	    console.log(doc);
 	    doc.save();

@@ -21,6 +21,7 @@
     		$("#exitDate").val(null);
     		$("#bucket").val(null);
     		$("#languagePreference").val(null);
+    		$("#status").val(null);
     		$("#action").val("create");
     		//$("#id").val(data.id);
 		}
@@ -47,9 +48,10 @@
 	  				<td>Exit Date</td>
 	  				<td>Bucket</td>
 	  				<td>Failed Contact Count</td>
+	  				<td>Status</td>
 	  				<td>Language Preference</td>
-            <td>Calls</td>
-            <td>Actions</td>
+            		<td>Calls</td>
+            		<td>Actions</td>
 	    		</thead>
 	  		</table>
 	  	</div>
@@ -156,8 +158,20 @@
                   </div>
                   <div class="form-group">
                     <label>Bucket</label>
-                      <input type="text" id="bucket" class="form-control"
-                          name="bucket" />
+                    <select id="bucket" class="form-control" name="bucket">
+                    	<option value="0">level 0</option>
+                    	<option value="1">level 1</option>
+                    	<option value="2">level 2</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                  	<label>Status</label>
+                  	<!-- <input type="text" id="status" class="form-control" name="status"> -->
+                  	<select id="status" class="form-control" name="status">
+                    	<option value="1">level 1</option>
+                    	<option value="2">level 2</option>
+                    	<option value="3">level 3</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label>Language Preference</label>
