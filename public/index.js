@@ -96,6 +96,12 @@ $(document).ready(function() {
                   { "data": "bucket"},
                   { "data": "failedContactCount"},
                   { "data": "status"},
+                  { "data": "nextCallDate",
+                    "render": function ( data, type, full, meta ) {
+                      return toDate(data/1000);
+                    }
+
+                  },
                   { "data": "languagePreference"},
                   {
                     "data": "",

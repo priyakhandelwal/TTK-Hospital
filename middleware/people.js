@@ -1,9 +1,8 @@
 'use strict';
 var people = require('../model/people');
 var uuid = require('node-uuid');
-
 var moment = require('moment');
-
+var ivrConfig = require('../ivr/ivrConfig');
 
 function getKey(x){
 	var matches = [];
@@ -60,6 +59,14 @@ exports.addNewPersonInformation = function(req, res){
 		return;
 	}
 
+	if(bucket != null){
+		var callingFrequency = ivrConfig[bucket].callingFrequency;
+		console.log("Calling Frequency is " + callingFrequency);
+		var nextCallDate = new Date();
+		nextCallDate.setDate(nextCallDate.getDate() + callingFrequency);
+		console.log("Next Call Date" + nextCallDate.getTime());
+	}
+
 	var patientInfo = new people({
 		id : id,
 		person : {
@@ -75,7 +82,8 @@ exports.addNewPersonInformation = function(req, res){
 		bucket : bucket,
 		languagePreference : languagePreference,
 		failedContactCount : failedContactCount,
-		status : status
+		status : status,
+		nextCallDate : nextCallDate.getTime(),
 	});
 
 	console.log(patientInfo);
@@ -135,6 +143,15 @@ exports.edit = function(req, res){
 		return;
 	}
 
+	if(bucket != null){
+		var callingFrequency = ivrConfig[bucket].callingFrequency;
+		console.log("Calling Frequency is " + callingFrequency);
+		var nextCallDate = new Date();
+		nextCallDate.setDate(nextCallDate.getDate() + callingFrequency);
+		console.log("Next Call Date" + nextCallDate.getTime());
+			
+	}
+
 	var updateData = new people({
 		id : id,
 		person : {
@@ -149,7 +166,8 @@ exports.edit = function(req, res){
 		exitDate : exitDate,
 		bucket : bucket,
 		status : status,
-		languagePreference : languagePreference
+		languagePreference : languagePreference,
+		nextCallDate : nextCallDate.getTime()
 	});
 
 
@@ -168,6 +186,7 @@ exports.edit = function(req, res){
 	    doc.bucket = bucket;
 	    doc.status = status;
 	    doc.languagePreference = languagePreference;
+	    doc.nextCallDate = nextCallDate.getTime();
 	    console.log(doc);
 	    doc.save();
 	    res.redirect('/index.html');
