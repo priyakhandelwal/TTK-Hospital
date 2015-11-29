@@ -1,6 +1,6 @@
 module.exports = [{
     message: {
-        en: {
+        english: {
             relative: "Hi, how  are you relative?",
             self: "Hi, how  are you self?"
         },
@@ -9,11 +9,11 @@ module.exports = [{
             self: "Tamil: Hi, how  are you self?"
         }
     },
-    callingFrequency: 7,
+    callingFrequenglishcy: 7,
     promotionCount: 4,
 }, {
     message: {
-        en: {
+        english: {
             relative: "Hi, how  are you relative 2.0?",
             self: "Hi, how  are you self 2.0?"
         },
@@ -22,11 +22,11 @@ module.exports = [{
             self: "Tamil: Hi, how  are you self 2.0?"
         }
     },
-    callingFrequency: 14,
+    callingFrequenglishcy: 14,
     promotionCount: 2,
 },{
     message: {
-        en: {
+        english: {
             relative: "Hi, how  are you relative 3.0?",
             self: "Hi, how  are you self 3.0?"
         },
@@ -35,6 +35,6 @@ module.exports = [{
             self: "Tamil: Hi, how  are you self 3.0?"
         }
     },
-    callingFrequency: 30,
+    callingFrequenglishcy: 30,
     promotionCount: 1,
 }];
