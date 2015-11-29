@@ -31,6 +31,7 @@ router.post('/people', function(req, res, next) {
     else
     if (requestType == "edit")
         patientMiddleware.edit(req, res);
+
 });
 
 router.post('/callxml/:lang/:calltype/:level', function(req, res, next) {
