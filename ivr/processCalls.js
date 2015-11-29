@@ -38,7 +38,7 @@ function processPersonCallRecords(person) {
     var today = moment().format("MM/DD/YY");
     var updateObj = {};
     updateObj.bucket = person.bucket;
-    if (calls.length == 0) {
+    if (calls.length === 0) {
         updateObj.failedContactCount = person.failedContactCount + 1;
     } else {
         if (moment(calls[calls.length - 1].time).format("MM/DD/YY") !== today) {
@@ -57,13 +57,15 @@ function processPersonCallRecords(person) {
         for (i = calls.length - 1; i >= 0; i--) {
             if (person.bucket !== calls[i].bucket)
                 break;
-            uniqueDates[calls[i].bucket] = true;
+            uniqueDates[moment(calls[i].time).format("MM/DD/YY") + i] = true;
         }
+        console.log(uniqueDates, person.bucket, ivrConfig.length , ivrConfig[person.bucket]);
+
         if (person.bucket < ivrConfig.length && Object.keys(uniqueDates).length >= ivrConfig[person.bucket].promotionCount) {
-            updateObj.bucket = person.bucket++;
+            updateObj.bucket = person.bucket + 1;
         }
     }
-    updateObj.nextCallDate = (person.bucket === ivrConfig.length)? 0 : person.nextCallDate + (ivrConfig[updateObj.bucket].callingFrequency * 24 * 60 * 60);
+    updateObj.nextCallDate = (person.bucket >= ivrConfig.length || updateObj.bucket >= ivrConfig.length)? 0 : person.nextCallDate + (ivrConfig[updateObj.bucket].callingFrequency * 24 * 60 * 60 * 1000);
     console.log(updateObj);
     people.findOneAndUpdate({
         id: person.id
@@ -75,6 +77,10 @@ function processPersonCallRecords(person) {
         } else {
             console.log(updateRes);
         }
+    });
+
+    DailyCallsModel.remove({}, function(err){
+        console.log(err);
     });
 
 }
