@@ -60,6 +60,7 @@ exports.addNewPersonInformation = function(req, res){
 	}
 
 	if(bucket != null){
+		console.log("Bucket " + bucket);
 		var callingFrequency = ivrConfig[bucket].callingFrequency;
 		console.log("Calling Frequency is " + callingFrequency);
 		var nextCallDate = new Date();
