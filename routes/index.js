@@ -68,6 +68,45 @@ router.get('/logCallResponse/:type', function(req, res, next) {
     res.end(response.toXML());
 });
 
+router.post('/calllog', function (req, res, next) {
+  var data = req.body,
+    updateObjSelf = {
+                        "response": data.response,
+                        "responder": "self",
+                        "bucket": data.bucket,
+                        "time": Date.now()
+                    },
+    updateObjRelative = {
+                            "response": data.response,
+                            "responder": "relative",
+                            "bucket": data.bucket,
+                            "time": Date.now()
+                        };
+
+    console.log("data ", data.number);
+  peopleModel.findOne({"person.phone": data.number}, function (err, response) {
+    console.log("response = %j", response);
+  });
+
+  peopleModel.findOneAndUpdate({"person.phone": data.number}, {$push: {calls: updateObjSelf}}, function (err, response) {
+    if (!err) {
+      console.log("updated self successful");
+    } else {
+      console.log("error", err);
+    }
+  });
+  peopleModel.findOneAndUpdate({"immediateFamily.phone": data.number}, {$push: {calls: updateObjRelative}}, function (err, response) {
+    if (!err) {
+      console.log("updated relative successful");
+    } else {
+      console.log("error", err);
+    }
+  });
+  console.log("data is= ", data);
+  res.status(201).send();
+
+});
+
 router.post('/call', function(req, res, next) {
     callUpdateMiddleware.updateCall(req, res);
 });
