@@ -9,6 +9,7 @@ function editButtonPressed(event){
     $("#entryDate").val(toDateYYYYMMDD(data.entryDate));
     $("#exitDate").val(toDateYYYYMMDD(data.exitDate));
     $("#bucket").val(data.bucket);
+    $("#status").val(data.status);
     $("#languagePreference").val(data.languagePreference);
     $("#action").val("edit");
     $("#id").val(data.id);
@@ -94,6 +95,13 @@ $(document).ready(function() {
                   },
                   { "data": "bucket"},
                   { "data": "failedContactCount"},
+                  { "data": "status"},
+                  { "data": "nextCallDate",
+                    "render": function ( data, type, full, meta ) {
+                      return toDate(data/1000);
+                    }
+
+                  },
                   { "data": "languagePreference"},
                   {
                     "data": "",

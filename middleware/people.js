@@ -1,9 +1,8 @@
 'use strict';
 var people = require('../model/people');
 var uuid = require('node-uuid');
-
 var moment = require('moment');
-
+var ivrConfig = require('../ivr/ivrConfig');
 
 function getKey(x){
 	var matches = [];
@@ -44,6 +43,7 @@ exports.addNewPersonInformation = function(req, res){
 	//var exitDate = 1912910290293;
 	var bucket = req.body.bucket || null;
 	var languagePreference = req.body.languagePreference || null;
+	var status = req.body.status || null;
 	var failedContactCount = 0;
 	var id = uuid.v1();
 
@@ -57,6 +57,14 @@ exports.addNewPersonInformation = function(req, res){
 		console.log("Incomplete support person information\n");
 		res.send({success: false, msg: "Incomplete support person information"});
 		return;
+	}
+
+	if(bucket != null){
+		var callingFrequency = ivrConfig[bucket].callingFrequency;
+		console.log("Calling Frequency is " + callingFrequency);
+		var nextCallDate = new Date();
+		nextCallDate.setDate(nextCallDate.getDate() + callingFrequency);
+		console.log("Next Call Date" + nextCallDate.getTime());
 	}
 
 	var patientInfo = new people({
@@ -73,7 +81,9 @@ exports.addNewPersonInformation = function(req, res){
 		exitDate : exitDate,
 		bucket : bucket,
 		languagePreference : languagePreference,
-		failedContactCount : failedContactCount
+		failedContactCount : failedContactCount,
+		status : status,
+		nextCallDate : nextCallDate.getTime(),
 	});
 
 	console.log(patientInfo);
@@ -117,6 +127,7 @@ exports.edit = function(req, res){
 	var exitDate = moment(req.body.exitDate, 'YYYY-MM-DD').unix();
 	console.log(exitDate);
 	var bucket = req.body.bucket || null;
+	var status = req.body.status || null;
 	var languagePreference = req.body.languagePreference || null;
 	var id = req.body.id || null;
 	console.log("PAPAP" + id);
@@ -132,6 +143,15 @@ exports.edit = function(req, res){
 		return;
 	}
 
+	if(bucket != null){
+		var callingFrequency = ivrConfig[bucket].callingFrequency;
+		console.log("Calling Frequency is " + callingFrequency);
+		var nextCallDate = new Date();
+		nextCallDate.setDate(nextCallDate.getDate() + callingFrequency);
+		console.log("Next Call Date" + nextCallDate.getTime());
+			
+	}
+
 	var updateData = new people({
 		id : id,
 		person : {
@@ -145,7 +165,9 @@ exports.edit = function(req, res){
 		entryDate : entryDate,
 		exitDate : exitDate,
 		bucket : bucket,
-		languagePreference : languagePreference
+		status : status,
+		languagePreference : languagePreference,
+		nextCallDate : nextCallDate.getTime()
 	});
 
 
@@ -162,7 +184,9 @@ exports.edit = function(req, res){
 	    doc.entryDate = entryDate;
 	    doc.exitDate = exitDate;
 	    doc.bucket = bucket;
+	    doc.status = status;
 	    doc.languagePreference = languagePreference;
+	    doc.nextCallDate = nextCallDate.getTime();
 	    console.log(doc);
 	    doc.save();
 	    res.redirect('/index.html');
