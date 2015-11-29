@@ -1,11 +1,35 @@
 html, body {
-  margin: 0px;
-  padding: 0px;
+    margin: 0px;
+    padding: 0px;
 }
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
+}
+
+table {
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 115%;
+    width: auto;
+    overflow: auto;
+    display: block;
+}
+
+table th {
+    background-color: rgb(112, 196, 105) !important;
+    font-weight: normal;
+    color: white;
+    padding: 20px 30px;
+    text-align: center;
+}
+
+table td {
+    background-color: rgb(238, 238, 238) !important;
+    padding: 20px 30px;
+    color: rgb(111, 111, 111) !important;
 }
